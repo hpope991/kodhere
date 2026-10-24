@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Kodhere</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="logo">Kodhere</span>
+    <span class="tagline">Isle of Man</span>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="contact">
+    <h1>Get in touch</h1>
+    <p>Interested in a piece, or want to commission something? Send a message and we'll get back to you.</p>
+    <form class="contact-form" onsubmit="return handleContactSubmit(event)">
+      <label>
+        Name
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit" class="btn">Send message</button>
+    </form>
+    <p class="contact-direct">Or email directly: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Kodhere &middot; Isle of Man</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

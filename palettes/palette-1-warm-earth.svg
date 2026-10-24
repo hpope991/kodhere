@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Georgia, serif">
+  <rect width="1000" height="620" fill="#eeeae2"/>
+  <text x="40" y="45" font-size="26" fill="#2b2b2b">Palette 1 — Warm Earth</text>
+
+  <!-- 1a LIGHT -->
+  <text x="40" y="95" font-size="18" fill="#2b2b2b">1a — Light</text>
+  <g font-size="12" fill="#2b2b2b" text-anchor="middle">
+    <rect x="40"  y="110" width="170" height="120" fill="#faf8f4" stroke="#d8d0c0"/>
+    <text x="125" y="250">#FAF8F4 Cream (bg)</text>
+    <rect x="230" y="110" width="170" height="120" fill="#c9b89a"/>
+    <text x="315" y="250">#C9B89A Sand</text>
+    <rect x="420" y="110" width="170" height="120" fill="#b5734a"/>
+    <text x="505" y="250">#B5734A Terracotta (accent)</text>
+    <rect x="610" y="110" width="170" height="120" fill="#6a4f33"/>
+    <text x="695" y="250" fill="#2b2b2b">#6A4F33 Warm Brown</text>
+    <rect x="800" y="110" width="170" height="120" fill="#2b2b2b"/>
+    <text x="885" y="250">#2B2B2B Charcoal (text)</text>
+  </g>
+
+  <!-- 1b DARK -->
+  <text x="40" y="325" font-size="18" fill="#2b2b2b">1b — Dark</text>
+  <g font-size="12" fill="#2b2b2b" text-anchor="middle">
+    <rect x="40"  y="340" width="170" height="120" fill="#1e1a15"/>
+    <text x="125" y="480">#1E1A15 Deep Bg</text>
+    <rect x="230" y="340" width="170" height="120" fill="#3a322a"/>
+    <text x="315" y="480">#3A322A Bark</text>
+    <rect x="420" y="340" width="170" height="120" fill="#c9824f"/>
+    <text x="505" y="480">#C9824F Terracotta (accent)</text>
+    <rect x="610" y="340" width="170" height="120" fill="#d4bb93"/>
+    <text x="695" y="480">#D4BB93 Sand</text>
+    <rect x="800" y="340" width="170" height="120" fill="#f2ead8"/>
+    <text x="885" y="480">#F2EAD8 Cream (text)</text>
+  </g>
+
+  <!-- preview bars -->
+  <rect x="40" y="520" width="460" height="70" fill="#faf8f4" stroke="#d8d0c0"/>
+  <text x="60" y="555" font-size="16" fill="#2b2b2b">Kodhere</text>
+  <text x="60" y="578" font-size="12" fill="#6a4f33">1a — light mode preview</text>
+  <rect x="540" y="520" width="420" height="70" fill="#1e1a15"/>
+  <text x="560" y="555" font-size="16" fill="#f2ead8">Kodhere</text>
+  <text x="560" y="578" font-size="12" fill="#c9824f">1b — dark mode preview</text>
+</svg>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — Kodhere</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="logo">Kodhere</span>
+    <span class="tagline">Isle of Man</span>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="gallery-section">
+    <h1>Gallery</h1>
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="painting">Paintings</button>
+      <button class="filter-btn" data-filter="drawing">Drawings</button>
+    </div>
+    <div class="grid" id="gallery-grid"></div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> Kodhere &middot; Isle of Man</p>
+</footer>
+
+<script src="js/artworks.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

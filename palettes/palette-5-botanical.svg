@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Georgia, serif">
+  <rect width="1000" height="620" fill="#e8ebe0"/>
+  <text x="40" y="45" font-size="26" fill="#2a3a28">Palette 5 — Botanical</text>
+
+  <!-- 5a LIGHT -->
+  <text x="40" y="95" font-size="18" fill="#2a3a28">5a — Light</text>
+  <g font-size="12" fill="#2a3a28" text-anchor="middle">
+    <rect x="40"  y="110" width="170" height="120" fill="#f7f3ea" stroke="#ccc9bc"/>
+    <text x="125" y="250">#F7F3EA Parchment (bg)</text>
+    <rect x="230" y="110" width="170" height="120" fill="#9ba87a"/>
+    <text x="315" y="250">#9BA87A Olive</text>
+    <rect x="420" y="110" width="170" height="120" fill="#3e5a3a"/>
+    <text x="505" y="250">#3E5A3A Forest (text)</text>
+    <rect x="610" y="110" width="170" height="120" fill="#b56838"/>
+    <text x="695" y="250">#B56838 Burnt Orange (accent)</text>
+    <rect x="800" y="110" width="170" height="120" fill="#7a3a28"/>
+    <text x="885" y="250">#7A3A28 Rust</text>
+  </g>
+
+  <!-- 5b DARK -->
+  <text x="40" y="325" font-size="18" fill="#2a3a28">5b — Dark</text>
+  <g font-size="12" fill="#2a3a28" text-anchor="middle">
+    <rect x="40"  y="340" width="170" height="120" fill="#121810"/>
+    <text x="125" y="480">#121810 Deep Forest Bg</text>
+    <rect x="230" y="340" width="170" height="120" fill="#24321e"/>
+    <text x="315" y="480">#24321E Moss</text>
+    <rect x="420" y="340" width="170" height="120" fill="#b2c28a"/>
+    <text x="505" y="480">#B2C28A Olive</text>
+    <rect x="610" y="340" width="170" height="120" fill="#d88252"/>
+    <text x="695" y="480">#D88252 Burnt Orange (accent)</text>
+    <rect x="800" y="340" width="170" height="120" fill="#f2ecd8"/>
+    <text x="885" y="480">#F2ECD8 Parchment (text)</text>
+  </g>
+
+  <rect x="40" y="520" width="460" height="70" fill="#f7f3ea" stroke="#ccc9bc"/>
+  <text x="60" y="555" font-size="16" fill="#3e5a3a">Kodhere</text>
+  <text x="60" y="578" font-size="12" fill="#b56838">5a — light mode preview</text>
+  <rect x="540" y="520" width="420" height="70" fill="#121810"/>
+  <text x="560" y="555" font-size="16" fill="#f2ecd8">Kodhere</text>
+  <text x="560" y="578" font-size="12" fill="#d88252">5b — dark mode preview</text>
+</svg>

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:\\\\Users\\\\harry\\\\OneDrive\\\\Documents\\\\website-hub\\\\public\")"
+    ]
+  }
+}
