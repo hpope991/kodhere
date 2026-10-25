@@ -1,10 +1,26 @@
+// Collections appear on the Gallery page in this order. A collection only
+// shows once at least one artwork belongs to it.
+const collections = [
+  {
+    id: 'new',
+    name: 'New',
+    description: ''
+  },
+  {
+    id: 'earlier',
+    name: 'Earlier Works',
+    description: 'Paintings in an earlier style that is no longer being made. Still available to buy.'
+  }
+];
+
 // Each artwork has an `images` array. images[0] is the main photo shown on the
 // gallery card. Inside the artwork page, all images appear in a slider.
+// `collection` must match one of the collection ids above.
 const artworks = [
   {
     id: 'haybails',
     title: 'Haybails',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -21,7 +37,7 @@ const artworks = [
   {
     id: 'lighthouse',
     title: 'Lighthouse',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -38,7 +54,7 @@ const artworks = [
   {
     id: 'moorlands',
     title: 'Moorlands',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -55,7 +71,7 @@ const artworks = [
   {
     id: 'sandreed',
     title: 'Sandreed',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -72,7 +88,7 @@ const artworks = [
   {
     id: 'skyhill',
     title: 'Skyhill',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',

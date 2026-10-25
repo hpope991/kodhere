@@ -181,12 +181,14 @@ function cardHtml(art) {
 function renderFeatured() {
   const grid = document.getElementById('featured-grid');
   const featured = artworks.filter(a => a.featured).slice(0, 4);
+  // Hide the section until there are featured pieces to show
+  grid.closest('.featured').style.display = featured.length ? '' : 'none';
   grid.innerHTML = featured.map(cardHtml).join('');
 }
 
 function renderGallery() {
   const grid = document.getElementById('gallery-grid');
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  const filtersWrap = document.getElementById('filters');
   const style = localStorage.getItem('galleryStyle') || 'a';
 
   // Gallery Style B — left empty for now, ready to design later.
@@ -195,20 +197,40 @@ function renderGallery() {
     return;
   }
 
-  function draw(filter) {
-    const list = filter === 'all' ? artworks : artworks.filter(a => a.category === filter);
-    grid.innerHTML = list.length
-      ? list.map(cardHtml).join('')
-      : '<p style="text-align:center; color:var(--muted); grid-column:1/-1;">No pieces yet in this category.</p>';
+  // Only collections that have at least one artwork are shown
+  const shown = collections.filter(c => artworks.some(a => a.collection === c.id));
+
+  function sectionHtml(c) {
+    const pieces = artworks.filter(a => a.collection === c.id);
+    return `
+      <section class="collection">
+        <h2>${c.name}</h2>
+        ${c.description ? `<p class="section-intro">${c.description}</p>` : ''}
+        <div class="collection-grid">${pieces.map(cardHtml).join('')}</div>
+      </section>`;
   }
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      draw(btn.dataset.filter);
+  function draw(filter) {
+    const list = filter === 'all' ? shown : shown.filter(c => c.id === filter);
+    grid.innerHTML = list.length
+      ? list.map(sectionHtml).join('')
+      : '<p style="text-align:center; color:var(--muted);">New work coming soon.</p>';
+  }
+
+  // Build a filter button per collection; skip the row when there's only one
+  if (filtersWrap) {
+    const options = [{ id: 'all', name: 'All' }, ...shown];
+    filtersWrap.innerHTML = shown.length > 1
+      ? options.map(c => `<button class="filter-btn${c.id === 'all' ? ' active' : ''}" data-filter="${c.id}">${c.name}</button>`).join('')
+      : '';
+    filtersWrap.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filtersWrap.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        draw(btn.dataset.filter);
+      });
     });
-  });
+  }
 
   draw('all');
 }
@@ -279,7 +301,8 @@ function renderArtworkDetail() {
 
 function setHeroImage() {
   const hero = document.querySelector('.hero-image');
-  const firstFeatured = artworks.find(a => a.featured);
+  // Prefer a featured current piece; fall back to any piece so the hero is never blank
+  const firstFeatured = artworks.find(a => a.featured) || artworks[0];
   if (firstFeatured) hero.style.backgroundImage = `url('${encodeURI(mainImage(firstFeatured))}')`;
 }
 
