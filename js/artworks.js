@@ -2,6 +2,11 @@
 // shows once at least one artwork belongs to it.
 const collections = [
   {
+    id: 'new',
+    name: 'New',
+    description: ''
+  },
+  {
     id: 'earlier',
     name: 'Earlier Works',
     description: 'Paintings in an earlier style that is no longer being made. Still available to buy.'
