@@ -171,13 +171,12 @@ const archivedWorks = () => artworks.filter(a => a.archived);
 
 function cardHtml(art) {
   const img = encodeURI(mainImage(art));
-  const detail = art.archived ? art.year : art.price;
   return `
     <a class="card" href="artwork.html?id=${art.id}">
       <div class="card-image"><img src="${img}" alt="${art.title}" loading="lazy" /></div>
       <div class="card-info">
         <h3>${art.title}</h3>
-        <p>${art.medium} &middot; ${detail}</p>
+        <p>${art.medium} &middot; ${art.price}</p>
       </div>
     </a>`;
 }
@@ -276,7 +275,7 @@ function renderArtworkDetail() {
   document.getElementById('artwork-medium').textContent = art.medium;
   document.getElementById('artwork-size').textContent = art.size;
   document.getElementById('artwork-year').textContent = art.year;
-  document.getElementById('artwork-price').textContent = art.archived ? 'From the archive' : art.price;
+  document.getElementById('artwork-price').textContent = art.price;
   document.getElementById('artwork-description').textContent = art.description;
 
   const subject = encodeURIComponent(`Enquiry: ${art.title}`);
@@ -284,7 +283,6 @@ function renderArtworkDetail() {
   document.getElementById('enquire-btn').href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 
   if (art.archived) {
-    document.getElementById('enquire-btn').style.display = 'none';
     const back = document.querySelector('.back-link');
     back.href = 'archive.html';
     back.innerHTML = '&larr; Back to archive';

@@ -1,6 +1,6 @@
 // Each artwork has an `images` array. images[0] is the main photo shown on the
 // gallery card. Inside the artwork page, all images appear in a slider.
-// Set `archived: true` to move a piece to the Archive page (no price or enquire button).
+// Set `archived: true` to move a piece to the Archive page.
 const artworks = [
   {
     id: 'haybails',
