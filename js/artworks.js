@@ -1,11 +1,21 @@
+// Collections appear on the Gallery page in this order. A collection only
+// shows once at least one artwork belongs to it.
+const collections = [
+  {
+    id: 'earlier',
+    name: 'Earlier Works',
+    description: 'Paintings in an earlier style that is no longer being made. Still available to buy.'
+  }
+];
+
 // Each artwork has an `images` array. images[0] is the main photo shown on the
 // gallery card. Inside the artwork page, all images appear in a slider.
-// Set `archived: true` to move a piece to the Archive page.
+// `collection` must match one of the collection ids above.
 const artworks = [
   {
     id: 'haybails',
     title: 'Haybails',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -17,13 +27,12 @@ const artworks = [
       'photos/Haybails easel.JPG',
       'photos/Haybails lxw.jpeg'
     ],
-    featured: false,
-    archived: true
+    featured: true
   },
   {
     id: 'lighthouse',
     title: 'Lighthouse',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -35,13 +44,12 @@ const artworks = [
       'photos/Lighthouse easel.JPG',
       'photos/Lighthouse lxw.jpeg'
     ],
-    featured: false,
-    archived: true
+    featured: true
   },
   {
     id: 'moorlands',
     title: 'Moorlands',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -53,13 +61,12 @@ const artworks = [
       'photos/Moorlands easel.JPG',
       'photos/Moorlands lxw.jpeg'
     ],
-    featured: false,
-    archived: true
+    featured: true
   },
   {
     id: 'sandreed',
     title: 'Sandreed',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -71,13 +78,12 @@ const artworks = [
       'photos/Sandreed easel.JPG',
       'photos/Sandreed lxw.jpeg'
     ],
-    featured: false,
-    archived: true
+    featured: false
   },
   {
     id: 'skyhill',
     title: 'Skyhill',
-    category: 'painting',
+    collection: 'earlier',
     medium: 'Oil on canvas',
     size: '[size]',
     year: '2025',
@@ -89,8 +95,7 @@ const artworks = [
       'photos/Skyhill easel.JPG',
       'photos/Skyhill lxw.JPG'
     ],
-    featured: false,
-    archived: true
+    featured: false
   }
 ];
 

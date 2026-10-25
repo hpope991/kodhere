@@ -1,4 +1,4 @@
-const PAGE_ORDER = ['index.html', 'gallery.html', 'archive.html', 'artwork.html', 'about.html', 'contact.html'];
+const PAGE_ORDER = ['index.html', 'gallery.html', 'artwork.html', 'about.html', 'contact.html'];
 
 function pageIndex(pathname) {
   const file = pathname.split('/').pop() || 'index.html';
@@ -166,9 +166,6 @@ function mainImage(art) {
   return (art.images && art.images[0]) || art.image || '';
 }
 
-const currentWorks = () => artworks.filter(a => !a.archived);
-const archivedWorks = () => artworks.filter(a => a.archived);
-
 function cardHtml(art) {
   const img = encodeURI(mainImage(art));
   return `
@@ -183,7 +180,7 @@ function cardHtml(art) {
 
 function renderFeatured() {
   const grid = document.getElementById('featured-grid');
-  const featured = currentWorks().filter(a => a.featured).slice(0, 4);
+  const featured = artworks.filter(a => a.featured).slice(0, 4);
   // Hide the section until there are featured pieces to show
   grid.closest('.featured').style.display = featured.length ? '' : 'none';
   grid.innerHTML = featured.map(cardHtml).join('');
@@ -191,10 +188,8 @@ function renderFeatured() {
 
 function renderGallery() {
   const grid = document.getElementById('gallery-grid');
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  const filtersWrap = document.getElementById('filters');
   const style = localStorage.getItem('galleryStyle') || 'a';
-  const isArchive = grid.dataset.show === 'archive';
-  const pieces = isArchive ? archivedWorks() : currentWorks();
 
   // Gallery Style B — left empty for now, ready to design later.
   if (style === 'b') {
@@ -202,21 +197,40 @@ function renderGallery() {
     return;
   }
 
-  function draw(filter) {
-    const list = filter === 'all' ? pieces : pieces.filter(a => a.category === filter);
-    const empty = pieces.length ? 'No pieces yet in this category.' : 'New work coming soon.';
-    grid.innerHTML = list.length
-      ? list.map(cardHtml).join('')
-      : `<p style="text-align:center; color:var(--muted); grid-column:1/-1; column-span:all;">${empty}</p>`;
+  // Only collections that have at least one artwork are shown
+  const shown = collections.filter(c => artworks.some(a => a.collection === c.id));
+
+  function sectionHtml(c) {
+    const pieces = artworks.filter(a => a.collection === c.id);
+    return `
+      <section class="collection">
+        <h2>${c.name}</h2>
+        ${c.description ? `<p class="section-intro">${c.description}</p>` : ''}
+        <div class="collection-grid">${pieces.map(cardHtml).join('')}</div>
+      </section>`;
   }
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      draw(btn.dataset.filter);
+  function draw(filter) {
+    const list = filter === 'all' ? shown : shown.filter(c => c.id === filter);
+    grid.innerHTML = list.length
+      ? list.map(sectionHtml).join('')
+      : '<p style="text-align:center; color:var(--muted);">New work coming soon.</p>';
+  }
+
+  // Build a filter button per collection; skip the row when there's only one
+  if (filtersWrap) {
+    const options = [{ id: 'all', name: 'All' }, ...shown];
+    filtersWrap.innerHTML = shown.length > 1
+      ? options.map(c => `<button class="filter-btn${c.id === 'all' ? ' active' : ''}" data-filter="${c.id}">${c.name}</button>`).join('')
+      : '';
+    filtersWrap.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filtersWrap.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        draw(btn.dataset.filter);
+      });
     });
-  });
+  }
 
   draw('all');
 }
@@ -282,19 +296,13 @@ function renderArtworkDetail() {
   const body = encodeURIComponent(`Hello,\n\nI'm interested in "${art.title}" (${art.size}, ${art.price}). Could you tell me more?\n\nThanks,\n`);
   document.getElementById('enquire-btn').href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 
-  if (art.archived) {
-    const back = document.querySelector('.back-link');
-    back.href = 'archive.html';
-    back.innerHTML = '&larr; Back to archive';
-  }
-
   document.title = `${art.title} — Kodhere`;
 }
 
 function setHeroImage() {
   const hero = document.querySelector('.hero-image');
   // Prefer a featured current piece; fall back to any piece so the hero is never blank
-  const firstFeatured = currentWorks().find(a => a.featured) || artworks[0];
+  const firstFeatured = artworks.find(a => a.featured) || artworks[0];
   if (firstFeatured) hero.style.backgroundImage = `url('${encodeURI(mainImage(firstFeatured))}')`;
 }
 
