@@ -231,6 +231,13 @@ h1, h2 {
   text-align: center;
 }
 
+.section-intro {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  margin: -1rem 0 2.5rem;
+}
+
 /* Grid */
 .grid {
   display: grid;

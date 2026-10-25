@@ -1,5 +1,6 @@
 // Each artwork has an `images` array. images[0] is the main photo shown on the
 // gallery card. Inside the artwork page, all images appear in a slider.
+// Set `archived: true` to move a piece to the Archive page (no price or enquire button).
 const artworks = [
   {
     id: 'haybails',
@@ -16,7 +17,8 @@ const artworks = [
       'photos/Haybails easel.JPG',
       'photos/Haybails lxw.jpeg'
     ],
-    featured: true
+    featured: false,
+    archived: true
   },
   {
     id: 'lighthouse',
@@ -33,7 +35,8 @@ const artworks = [
       'photos/Lighthouse easel.JPG',
       'photos/Lighthouse lxw.jpeg'
     ],
-    featured: true
+    featured: false,
+    archived: true
   },
   {
     id: 'moorlands',
@@ -50,7 +53,8 @@ const artworks = [
       'photos/Moorlands easel.JPG',
       'photos/Moorlands lxw.jpeg'
     ],
-    featured: true
+    featured: false,
+    archived: true
   },
   {
     id: 'sandreed',
@@ -67,7 +71,8 @@ const artworks = [
       'photos/Sandreed easel.JPG',
       'photos/Sandreed lxw.jpeg'
     ],
-    featured: false
+    featured: false,
+    archived: true
   },
   {
     id: 'skyhill',
@@ -84,7 +89,8 @@ const artworks = [
       'photos/Skyhill easel.JPG',
       'photos/Skyhill lxw.JPG'
     ],
-    featured: false
+    featured: false,
+    archived: true
   }
 ];
 

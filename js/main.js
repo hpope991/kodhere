@@ -1,4 +1,4 @@
-const PAGE_ORDER = ['index.html', 'gallery.html', 'artwork.html', 'about.html', 'contact.html'];
+const PAGE_ORDER = ['index.html', 'gallery.html', 'archive.html', 'artwork.html', 'about.html', 'contact.html'];
 
 function pageIndex(pathname) {
   const file = pathname.split('/').pop() || 'index.html';
@@ -166,21 +166,27 @@ function mainImage(art) {
   return (art.images && art.images[0]) || art.image || '';
 }
 
+const currentWorks = () => artworks.filter(a => !a.archived);
+const archivedWorks = () => artworks.filter(a => a.archived);
+
 function cardHtml(art) {
   const img = encodeURI(mainImage(art));
+  const detail = art.archived ? art.year : art.price;
   return `
     <a class="card" href="artwork.html?id=${art.id}">
       <div class="card-image"><img src="${img}" alt="${art.title}" loading="lazy" /></div>
       <div class="card-info">
         <h3>${art.title}</h3>
-        <p>${art.medium} &middot; ${art.price}</p>
+        <p>${art.medium} &middot; ${detail}</p>
       </div>
     </a>`;
 }
 
 function renderFeatured() {
   const grid = document.getElementById('featured-grid');
-  const featured = artworks.filter(a => a.featured).slice(0, 4);
+  const featured = currentWorks().filter(a => a.featured).slice(0, 4);
+  // Hide the section until there are featured pieces to show
+  grid.closest('.featured').style.display = featured.length ? '' : 'none';
   grid.innerHTML = featured.map(cardHtml).join('');
 }
 
@@ -188,6 +194,8 @@ function renderGallery() {
   const grid = document.getElementById('gallery-grid');
   const filterBtns = document.querySelectorAll('.filter-btn');
   const style = localStorage.getItem('galleryStyle') || 'a';
+  const isArchive = grid.dataset.show === 'archive';
+  const pieces = isArchive ? archivedWorks() : currentWorks();
 
   // Gallery Style B — left empty for now, ready to design later.
   if (style === 'b') {
@@ -196,10 +204,11 @@ function renderGallery() {
   }
 
   function draw(filter) {
-    const list = filter === 'all' ? artworks : artworks.filter(a => a.category === filter);
+    const list = filter === 'all' ? pieces : pieces.filter(a => a.category === filter);
+    const empty = pieces.length ? 'No pieces yet in this category.' : 'New work coming soon.';
     grid.innerHTML = list.length
       ? list.map(cardHtml).join('')
-      : '<p style="text-align:center; color:var(--muted); grid-column:1/-1;">No pieces yet in this category.</p>';
+      : `<p style="text-align:center; color:var(--muted); grid-column:1/-1; column-span:all;">${empty}</p>`;
   }
 
   filterBtns.forEach(btn => {
@@ -267,19 +276,27 @@ function renderArtworkDetail() {
   document.getElementById('artwork-medium').textContent = art.medium;
   document.getElementById('artwork-size').textContent = art.size;
   document.getElementById('artwork-year').textContent = art.year;
-  document.getElementById('artwork-price').textContent = art.price;
+  document.getElementById('artwork-price').textContent = art.archived ? 'From the archive' : art.price;
   document.getElementById('artwork-description').textContent = art.description;
 
   const subject = encodeURIComponent(`Enquiry: ${art.title}`);
   const body = encodeURIComponent(`Hello,\n\nI'm interested in "${art.title}" (${art.size}, ${art.price}). Could you tell me more?\n\nThanks,\n`);
   document.getElementById('enquire-btn').href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 
+  if (art.archived) {
+    document.getElementById('enquire-btn').style.display = 'none';
+    const back = document.querySelector('.back-link');
+    back.href = 'archive.html';
+    back.innerHTML = '&larr; Back to archive';
+  }
+
   document.title = `${art.title} — Kodhere`;
 }
 
 function setHeroImage() {
   const hero = document.querySelector('.hero-image');
-  const firstFeatured = artworks.find(a => a.featured);
+  // Prefer a featured current piece; fall back to any piece so the hero is never blank
+  const firstFeatured = currentWorks().find(a => a.featured) || artworks[0];
   if (firstFeatured) hero.style.backgroundImage = `url('${encodeURI(mainImage(firstFeatured))}')`;
 }
 
